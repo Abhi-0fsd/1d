@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Cart - ShopEasy</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: skyblue;
+      padding: 15px 30px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .cart-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+
+    .item-details {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .item-info {
+      flex-grow: 1;
+    }
+
+    .item-info h4 {
+      margin: 0 0 5px;
+    }
+
+    .item-price, .item-qty {
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .total-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .checkout-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .checkout-btn:hover {
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  🛒 ShopEasy - Your Cart
+</header>
+
+<div class="cart-container">
+  <div class="cart-title">Shopping Cart</div>
+
+  <!-- Cart Item -->
+  <div class="cart-item">
+    <div class="item-details">
+      <img src="https://www.manubim.com/custom/manubim/image/cache/w0h0q80np1/product/Phone%20Holders/personalised-3d-printed-phone-holders.png/150" alt="PhoneStand">
+      <div class="item-info">
+        <h4>Phone Stand</h4>
+        <small>₹114 each</small>
+      </div>
+    </div>
+    <div class="item-qty">Qty: 2</div>
+    <div class="item-price">₹228</div>
+  </div>
+
+  <!-- Another Cart Item -->
+  <div class="cart-item">
+    <div class="item-details">
+      <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/key-chain/e/d/n/keychain-for-girls-heart-shape-keychain-for-kids-girls-keychain-original-imagwwe7kmyav4zs.jpeg?q=90&crop=false/200" alt="Keychain">
+      <div class="item-info">
+        <h4>Keychain</h4>
+        <small>₹164 each</small>
+      </div>
+    </div>
+    <div class="item-qty">Qty: 1</div>
+    <div class="item-price">₹164</div>
+  </div>
+
+  <!-- Total Section -->
+  <div class="total-section">
+    <div><strong>Total:</strong></div>
+    <div><strong>₹392</strong></div>
+  </div>
+
+  <button class="checkout-btn">Proceed to Checkout</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ShopEasy Demo</title>
+  <style>
+    /*  ─────  BASIC STYLE  ─────  */
+    *{box-sizing:border-box;margin:18;padding:0}
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8}
+    header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:skyblue;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+    .logo{font-size:24px;font-weight:700;color:purple}
+    .search{flex:1;margin:0 20px;position:relative}
+    .search input{width:95%;padding:10px 40px 10px 9px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+    .search button{position:absolute;right:3px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:15px;cursor:pointer}
+    .user-actions a{margin-left:5px;text-decoration:none}
+    .user-actions button{padding:9px 5px;font-size:18px;font-weight:500;border-radius:6px;background:#fff;border:1px solid #000;cursor:pointer}
+
+    nav{background:#e0e0e0;padding:10px 30px;box-shadow:0 2px 5px rgba(0,0,0,.05);display:flex;justify-content:center;gap:30px}
+    nav a{position:relative;text-decoration:none;color:#444;font-weight:500;padding:6px;transition:color .3s}
+    nav a::after{content:'';position:absolute;left:0;bottom:-2px;height:2px;width:0;background:#000;transition:width .3s}
+    nav a:hover,nav a.active{color:#000;font-weight:700}
+    nav a:hover::after,nav a.active::after{width:100%}
+
+    section{transition:opacity .4s ease,transform .4s ease}
+    .hidden{opacity:0;transform:translateY(10px);pointer-events:none;height:0;overflow:hidden}
+    .visible{opacity:1;transform:translateY(0)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;padding:20px}
+    .card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
+    .card img{width:100%;height:150px;object-fit:cover;border-radius:6px}
+    .price{margin-top:10px;font-weight:700;color:green}
+    .old-price{text-decoration:line-through;color:#888;font-size:.9em}
+
+    /* filament list & colour list –- unchanged from previous reply */
+    #filamentList{counter-reset:item;list-style:none;padding:0;max-width:320px;margin:0 auto}
+    .filament-item{counter-increment:item;display:flex;align-items:center;gap:12px;margin:10px 0;padding:10px 16px;font:600 19px/1 Arial,sans-serif;border:2px solid #6200ea;border-radius:8px;background:#fff;cursor:pointer;transition:background .25s}
+    .filament-item:hover{background:#f2edff}
+    .filament-item::before{content:counter(item);width:34px;height:34px;border-radius:50%;background:#6200ea;color:#fff;display:flex;justify-content:center;align-items:center;font-weight:700}
+    #colourGrid{padding:25px 0;display:flex;flex-direction:column;align-items:center;gap:22px}
+    .colour-row{display:flex;align-items:center;gap:14px;background:#fff;padding:12px 20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,.1);min-width:220px;opacity:0;animation:fadeIn .6s forwards}
+    @keyframes fadeIn{to{opacity:1}}
+    .swatch{width:44px;height:30px;border-radius:6px;border:1px solid #aaa}
+
+    .footer-line{height:3px;background:#48bfe3;width:100%}
+    footer{background:#5e60ce;color:#fff;padding:20px 30px;text-align:center}
+    .footer-nav a{color:#fff;text-decoration:none;margin:0 10px;font-size:14px}
+    .footer-nav a:hover{text-decoration:underline}
+    .footer-copy{margin-top:10px;font-size:13px}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">ShopEasy</div>
+  <div class="search">
+    <form onsubmit="return searchFunction()">
+      <input id="searchInput" placeholder="Search ShopEasy.in">
+      <button>🔍</button>
+    </form>
+  </div>
+  <div class="user-actions">
+    <a href="signin.html"><button>Sign in</button></a>
+    <a href="signup.html"><button>Sign up</button></a>
+    <a href="cart.html"><button>🛒 Cart</button></a>
+  </div>
+</header>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" id="homeLink"     class="active">Home</a>
+  <a href="#" id="filamentLink">Types of filament</a>
+  <a href="#" id="colourLink"  >Types of colour</a>
+  <a href="#">Kids</a><a href="#">Gifts</a><a href="#">Offers</a>
+</nav>
+
+<!-- ───── PRODUCTS SECTION ───── -->
+<section id="productGrid" class="grid">
+  <div class="card">
+    <img src="https://www.manubim.com/custom/manubim/image/cache/w0h0q80np1/product/Phone%20Holders/personalised-3d-printed-phone-holders.png/150" alt="PhoneStand">
+    <h3>PhoneStand</h3>
+    <div class="price">₹114 <span class="old-price">₹199</span></div>
+    <button onclick="handleView('product.html');location.href='product.html'">View</button>
+  </div>
+  <div class="card">
+    <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/key-chain/e/d/n/keychain-for-girls-heart-shape-keychain-for-kids-girls-keychain-original-imagwwe7kmyav4zs.jpeg?q=90&crop=false" alt="Keychain">
+    <h3>Keychain</h3>
+    <div class="price">₹164 <span class="old-price">₹225</span></div>
+    <button onclick="handleView('product.html');location.href='product.html'">View</button>
+  </div>
+  <div class="card">
+    <img src="c:\Users\narav\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\B1EEC33C726A60554BC78518D5F9B32C\WhatsApp Image 2025-05-18 at 13.40.13_5ccff1de.jpg" alt="PhotoFrame with Stand">
+    <h3>PhotoFrame with Stand</h3>
+    <div class="price">₹198 <span class="old-price">₹225</span></div>
+    <button onclick="handleView('product.html');location.href='amount3.html'">View</button>
+  </div>
+  <div class="card">
+    <img src="c:/Users/narav/OneDrive/Desktop/a/WhatsApp Image 2025-04-19 at 15.02.31_50aa66bb.jpg" alt="Birthday Gift">
+    <h3>Birthday Gift</h3>
+    <div class="price">₹430 <span class="old-price">₹500</span></div>
+    <button onclick="handleView('product.html');location.href='amount4.html'">View</button>
+  </div>
+  <div class="card">
+    <img src="c:/Users/narav/OneDrive/Desktop/a/WhatsApp Image 2025-04-19 at 15.01.45_3751b180.jpg" alt="PhotoFrame">
+    <h3>PhotoFrame</h3>
+    <div class="price">₹330 <span class="old-price">₹400</span></div>
+    <button onclick="handleView('product.html'); location.href='amount5.html'">View</button>
+
+  </div>
+</section>
+
+<!-- FILAMENT LIST -->
+<section id="filamentGrid" class="hidden">
+  <div class="card" style="width:100%;">
+    <h1 style="text-align:center;margin-bottom:25px;"><b>Types of Filament</b></h1>
+    <ul id="filamentList">
+      <li class="filament-item">PLA</li><li class="filament-item">ABS</li><li class="filament-item">PETG</li>
+      <li class="filament-item">TPU / TPE / TPC</li><li class="filament-item">Nylon</li><li class="filament-item">Wood</li>
+      <li class="filament-item">Metal (Steel / Aluminium)</li><li class="filament-item">Metallic-look</li><li class="filament-item">Biocompatible</li>
+    </ul>
+  </div>
+</section>
+
+<!-- COLOUR SECTION -->
+<section id="colourGrid" class="hidden">
+  <div class="colour-row"><span class="swatch" style="background:#ff0"></span><h4>Yellow</h4></div>
+  <div class="colour-row"><span class="swatch" style="background:#87CEEB"></span><h4>Sky Blue</h4></div>
+  <div class="colour-row"><span class="swatch" style="background:#00008B"></span><h4>Royal Blue</h4></div>
+  <div class="colour-row"><span class="swatch" style="background:#fff"></span><h4>White</h4></div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-line"></div>
+<footer>
+  <div class="footer-nav"><a href="#">About Us</a><a href="#">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Help</a></div>
+  <div class="footer-copy">© 2025 ShopEasy. All rights reserved.</div>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+/* ---------- COMMON UI ---------- */
+function searchFunction(){
+  alert('Searching for: '+document.getElementById('searchInput').value.trim());
+  return false;
+}
+const productGrid  = document.getElementById('productGrid');
+const filamentGrid = document.getElementById('filamentGrid');
+const colourGrid   = document.getElementById('colourGrid');
+const links        = document.querySelectorAll('nav a');
+function showSection(sec){
+  [productGrid,filamentGrid,colourGrid].forEach(s=>{s.classList.add('hidden');s.classList.remove('visible');});
+  sec.classList.remove('hidden');sec.classList.add('visible');
+}
+function makeActive(link){links.forEach(l=>l.classList.remove('active'));link.classList.add('active');}
+document.getElementById('homeLink'    ).onclick=e=>{e.preventDefault();showSection(productGrid );makeActive(e.target);}
+document.getElementById('filamentLink').onclick=e=>{e.preventDefault();showSection(filamentGrid);makeActive(e.target);}
+document.getElementById('colourLink'  ).onclick=e=>{e.preventDefault();showSection(colourGrid  );makeActive(e.target);}
+
+/* ---------- AUTH & VIEW ---------- */
+function handleView(url){
+  if(localStorage.getItem('loggedIn')==='true'){
+    window.location.href = url;
+  }else{
+    alert('Please sign up or sign in to view product details.');
+  }
+}
+
+/* ---------- SIGN-UP / SIGN-IN PARAM ---------- */
+const query = new URLSearchParams(location.search);
+if(query.get('signedup')==='true' || query.get('signin')==='true'){
+  localStorage.setItem('loggedIn','true');
+  alert('Login successful! Welcome to ShopEasy.');
+  showSection(productGrid);
+  makeActive(document.getElementById('homeLink'));
+  history.replaceState({},document.title,location.pathname);   // clean URL
+}
+</script>
+</body>
+</html>
